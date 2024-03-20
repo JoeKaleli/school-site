@@ -8,16 +8,15 @@
 </head>
 <body>
      <!--Nav bar-->
-
      <div  class="navbar">
 
         <h2>THE  <span>ST CLEMENT SCHOOL</span></h2>
         <ul>
             <li><a href="./about.html">ABOUT</a></li>
             <li><a href="#">SERVICES</a></li>
-            <li><a href="./skills.html">SKILLS</a></li>
-            <li><a href="#">EXPERIENCES</a></li>
-            <li><a href="./contact.html">CONTACT</a></li>
+            <li><a href="./skills.html">ADMINSTRATION</li>
+            <li><a href="#">STUDENTS</a></li>
+            <li><a href="./contact.html">STAFF</a></li>
         </ul>
 
     </div>
@@ -54,14 +53,95 @@
 
         </div>
     <!--Hero Right-->
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Search</title>
+</head>
+<body>
     <div class="hero_right">
+        <!-- Image -->
         <img src="./images/students.jpeg" alt="my photo">
+        
+        <!-- Search inputs and button -->
+        <input type="text" id="searchName" placeholder="Enter name">
+        <input type="number" id="searchId" placeholder="Enter ID">
+        <button onclick="searchStudent()">Search</button>
+
+        <!-- Search results container -->
+        <div id="searchResults"></div>
     </div>
+
+    <script>
+        const students = [
+            { name: "John Doe", id: 1, image: "john.jpg", class: "Mathematics" },
+            { name: "Jane Smith", id: 2, image: "jane.jpg", class: "Science" },
+            // Add more student data as needed
+        ];
+
+        // Function to perform student search
+        function searchStudent() {
+            // Get input values
+            const searchName = document.getElementById('searchName').value.trim();
+            const searchId = parseInt(document.getElementById('searchId').value);
+
+            // Filter students based on search query
+            const matchedStudents = students.filter(student => {
+                return student.name.toLowerCase().includes(searchName.toLowerCase()) ||
+                       student.id === searchId;
+            });
+
+            // Display search results
+            displaySearchResults(matchedStudents);
+        }
+
+        // Function to display search results
+        function displaySearchResults(results) {
+            const searchResultsDiv = document.getElementById('searchResults');
+            searchResultsDiv.innerHTML = ''; // Clear previous results
+
+            if (results.length === 0) {
+                searchResultsDiv.textContent = "No matching students found.";
+                return;
+            }
+
+            // Iterate through matched students and display their information
+            results.forEach(student => {
+                const studentDiv = document.createElement('div');
+                studentDiv.classList.add('student');
+
+                // Create elements for student information
+                const nameElement = document.createElement('p');
+                nameElement.textContent = `Name: ${student.name}`;
+                studentDiv.appendChild(nameElement);
+
+                const idElement = document.createElement('p');
+                idElement.textContent = `ID: ${student.id}`;
+                studentDiv.appendChild(idElement);
+
+                const imageElement = document.createElement('img');
+                imageElement.src = student.image;
+                studentDiv.appendChild(imageElement);
+
+                const classElement = document.createElement('p');
+                classElement.textContent = `Class: ${student.class}`;
+                studentDiv.appendChild(classElement);
+
+                // Append student info to search results container
+                searchResultsDiv.appendChild(studentDiv);
+            });
+        }
+    </script>
+</body>
+</html>
+
 
         
 
 
     </div>
-    
+    <script src="./app.js"></script>
 </body>
 </html>
