@@ -7,36 +7,30 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-     <!--Nav bar-->
-     <div  class="navbar">
-
-        <h2>THE  <span>ST CLEMENT SCHOOL</span></h2>
+    <!--Nav bar-->
+    <div class="navbar">
+        <h2>THE <span>ST CLEMENT EDUCATIONAL CENTRE</span></h2>
+        <input type="text" id="input" value="Search Student's Calendar" maxlength="10">
+        <input type="button" value="Search">
         <ul>
             <li><a href="./about.html">ABOUT</a></li>
-            <li><a href="#">SERVICES</a></li>
-            <li><a href="./skills.html">ADMINSTRATION</li>
-            <li><a href="#">STUDENTS</a></li>
+            <li><a href="./services.html">SERVICES</a></li>
+            <li><a href="./adminstration.html">ADMINISTRATION</a></li>
             <li><a href="./contact.html">STAFF</a></li>
         </ul>
-
     </div>
 
-    <!-- Hero Secton -->
-
+    <!-- Hero Section -->
     <div class="hero">
-
+        
         <div class="hero_left">
-
             <h2>Welcome!<span>St Clement Educational Centre</span><br>Official school website</h2>
             <h2>Our unwavering dedication lies in fostering significant academic progress and learners' well-being while maintaining affordability</h2>
-
             <div class="my_buttons">
                 <button>View Resume{Previous performance}</button>
                 <button id="contact_btn">Contact Us</button>
             </div>
-
             <div class="icons">
-
                 <div>
                     <img src="./images/download (1).jpeg" alt="github logo">
                 </div>
@@ -44,104 +38,57 @@
                     <img src="./images/linkedIn.png" alt="In logo">
                 </div>
                 <div>
-                    <img src="./images/twitter.png" alt="twiter logo">
+                    <img src="./images/twitter.png" alt="twitter logo">
                 </div>
                 <div>
-                    <img src="./images/insta.jpeg" alt="insta logo">
+                    <img src="./images/insta.jpeg" alt="instagram logo">
                 </div>
             </div>
-
+            <form action="actionpage.py" method="POST" required>
+                <br/>
+                <br/>
+                <h4>LOG-IN</h4>
+                <br/>
+                <div>
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" placeholder="Joe">
+                </div>
+                <br/>
+                <div>
+                <label for="lname">Last-Name</label>
+                <input type="text" id="lname" name="lname" placeholder="Kaleli">
+                </div>
+            </form>
         </div>
-    <!--Hero Right-->
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Search</title>
-</head>
-<body>
-    <div class="hero_right">
-        <!-- Image -->
-        <img src="./images/students.jpeg" alt="my photo">
         
-        <!-- Search inputs and button -->
-        <input type="text" id="searchName" placeholder="Enter name">
-        <input type="number" id="searchId" placeholder="Enter ID">
-        <button onclick="searchStudent()">Search</button>
+        <!-- Hero Right (Student Search) -->
+        <div class="hero_right">
+            <img src="./images/students.jpeg" alt="my photo">
+            <h2>Textbox</h2>
+            <label for = 'tbuser'>Username:</label>
+            <input type="text" id="tbuser" value="Students-Name" maxlength = '10'>
+            <label for="adminNo">Admission-number:</label>
+            <input type="number" id="adminNo" value="ADM No." maxlength = '4'>
+            <input type="button" id="btn1" Value="Search">
+            <div id="searchResults"></div>
+        </div>
+        <p class="output" id="output">
 
-        <!-- Search results container -->
-        <div id="searchResults"></div>
+        </p>
     </div>
 
-    <script>
-        const students = [
-            { name: "John Doe", id: 1, image: "john.jpg", class: "Mathematics" },
-            { name: "Jane Smith", id: 2, image: "jane.jpg", class: "Science" },
-            // Add more student data as needed
-        ];
-
-        // Function to perform student search
-        function searchStudent() {
-            // Get input values
-            const searchName = document.getElementById('searchName').value.trim();
-            const searchId = parseInt(document.getElementById('searchId').value);
-
-            // Filter students based on search query
-            const matchedStudents = students.filter(student => {
-                return student.name.toLowerCase().includes(searchName.toLowerCase()) ||
-                       student.id === searchId;
-            });
-
-            // Display search results
-            displaySearchResults(matchedStudents);
-        }
-
-        // Function to display search results
-        function displaySearchResults(results) {
-            const searchResultsDiv = document.getElementById('searchResults');
-            searchResultsDiv.innerHTML = ''; // Clear previous results
-
-            if (results.length === 0) {
-                searchResultsDiv.textContent = "No matching students found.";
-                return;
+    <script src="./app.js">
+            const txt1 = document.getElementById('tbuser');
+            const btn1 = document.getElementById('btn1');
+            const out2 = document.getElementById('Display Results');
+            
+            function fun1() {
+                out1.innerHTML = txt1.value;
             }
 
-            // Iterate through matched students and display their information
-            results.forEach(student => {
-                const studentDiv = document.createElement('div');
-                studentDiv.classList.add('student');
+            btn1.addEventListener('click', fun1);
 
-                // Create elements for student information
-                const nameElement = document.createElement('p');
-                nameElement.textContent = `Name: ${student.name}`;
-                studentDiv.appendChild(nameElement);
 
-                const idElement = document.createElement('p');
-                idElement.textContent = `ID: ${student.id}`;
-                studentDiv.appendChild(idElement);
-
-                const imageElement = document.createElement('img');
-                imageElement.src = student.image;
-                studentDiv.appendChild(imageElement);
-
-                const classElement = document.createElement('p');
-                classElement.textContent = `Class: ${student.class}`;
-                studentDiv.appendChild(classElement);
-
-                // Append student info to search results container
-                searchResultsDiv.appendChild(studentDiv);
-            });
-        }
     </script>
-</body>
-</html>
-
-
-        
-
-
-    </div>
-    <script src="./app.js"></script>
 </body>
 </html>

@@ -1,35 +1,15 @@
-const Searchbar = document.querySelector('.Searchbar');
-
-Searchbar.addEventListener('click', function(event) {
-    const searchName = document.getElementById('searchInput').value.trim();
-    const searchId = parseInt(document.getElementById('searchId').value);
-
-    const classes = [
-        { name: "John Joe", id: 1 },
-        { name: "Nomsa Wambuku", id: 2 }
-    ];
-
-    let foundClass = null;
-
-    for (const classItem of classes) {
-        if (classItem.name === searchName && classItem.id === searchId) {
-            foundClass = classItem;
-            break;
-        }
-    }
-
-    if (foundClass !== null) {
-        console.log("Found class:", foundClass);
-    } else {
-        console.log("Class not found.");
-    }
-});
-
-// Note: You should remove one of the duplicate `searchStudent()` function definitions.
-// Here, I'll remove the second definition.
+// Fetch student data from JSON file
+async function fetchStudentsData() {
+    const response = await fetch('http://localhost:3000');
+    const data = await response.json();
+    return data;
+}
 
 // Function to perform student search
-function searchStudent() {
+async function searchStudent() {
+    const students = await fetchStudentsData();
+    
+    // Get input values
     const searchName = document.getElementById('searchName').value.trim();
     const searchId = parseInt(document.getElementById('searchId').value);
 
@@ -52,6 +32,10 @@ function displaySearchResults(results) {
         searchResultsDiv.textContent = "No matching students found.";
         return;
     }
+
+    // Create a container for the search results
+    const resultsContainer = document.createElement('div');
+    resultsContainer.classList.add('searchResultsContainer');
 
     // Iterate through matched students and display their information
     results.forEach(student => {
@@ -76,10 +60,10 @@ function displaySearchResults(results) {
         studentDiv.appendChild(classElement);
 
         // Append student info to search results container
-        searchResultsDiv.appendChild(studentDiv);
+        resultsContainer.appendChild(studentDiv);
     });
+
+    // Append search results container just below the search bar
+    const searchRightDiv = document.querySelector('.hero_right');
+    searchRightDiv.appendChild(resultsContainer);
 }
-
-
-
-
